@@ -10,7 +10,9 @@ class Code extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(8), // Padding around the text
-      color: Colors.grey.withAlpha(50), // Light grey background with transparency
+      color: Colors.grey.withAlpha(
+        50,
+      ), // Light grey background with transparency
       child: Text(
         text,
         style: TextStyle(
@@ -31,7 +33,8 @@ class MyIntWidget extends StatefulWidget {
   State<MyIntWidget> createState() => _MyIntWidgetState();
 }
 
-class _MyIntWidgetState extends State<MyIntWidget> with TickerProviderStateMixin {
+class _MyIntWidgetState extends State<MyIntWidget>
+    with TickerProviderStateMixin {
   late int _value; // Internal state of the current integer value
   late AnimationController _controller; // Controls the animation
   late Animation<int> _valueAnimation; // Animates between old and new integer
@@ -54,13 +57,14 @@ class _MyIntWidgetState extends State<MyIntWidget> with TickerProviderStateMixin
       _controller.reset(); // Reset the controller before starting new animation
 
       // Animate from the current value to the new value
-      _valueAnimation = IntTween(begin: _value, end: widget.value).animate(_controller)
-        ..addListener(() {
-          // Update the internal value as the animation progresses
-          setState(() {
-            _value = _valueAnimation.value;
-          });
-        });
+      _valueAnimation =
+          IntTween(begin: _value, end: widget.value).animate(_controller)
+            ..addListener(() {
+              // Update the internal value as the animation progresses
+              setState(() {
+                _value = _valueAnimation.value;
+              });
+            });
 
       _controller.forward(); // Start the animation
     }

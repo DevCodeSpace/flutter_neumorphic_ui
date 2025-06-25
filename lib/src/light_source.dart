@@ -64,8 +64,9 @@ class LightSource {
 
   /// Interpolates between two LightSource instances
   static LightSource? lerp(LightSource? a, LightSource? b, double t) {
-    if (a == null && b == null)
+    if (a == null && b == null) {
       return null; // Returns null if both inputs are null
+    }
     if (a == null) return b; // Returns b if a is null
     if (b == null) return a; // Returns a if b is null
     if (a == b) return a; // Returns a if both are equal

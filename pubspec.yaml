@@ -1,7 +1,9 @@
 name: flutter_neumorphic_ui
 description: "A Flutter package for creating customizable neumorphic (soft UI) widgets with theme, depth, and light source support."
 version: 0.0.1
-homepage:
+homepage: https://github.com/DevCodeSpace/flutter_neumorphic_ui
+issue_tracker: https://github.com/DevCodeSpace/flutter_neumorphic_ui/issues
+documentation: https://pub.dev/documentation/flutter_neumorphic_ui/latest/
 
 environment:
   sdk: ^3.8.1

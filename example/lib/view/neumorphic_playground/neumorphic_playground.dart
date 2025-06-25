@@ -144,6 +144,7 @@ class __PageState extends State<_Page> {
             borderRadius: BorderRadius.circular(16), // Rounded corners
             selectedColor: Colors.white, // Selected text color
             fillColor: Colors.deepPurpleAccent, // Selected background color
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.5), // Unselected text color
             isSelected: List.generate(
               2,

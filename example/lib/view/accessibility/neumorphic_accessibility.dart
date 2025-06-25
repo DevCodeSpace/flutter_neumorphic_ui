@@ -6,6 +6,7 @@ class NeumorphicAccessibility extends StatefulWidget {
   const NeumorphicAccessibility({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _NeumorphicAccessibilityState createState() =>
       _NeumorphicAccessibilityState();
 }
@@ -135,6 +136,7 @@ class __PageState extends State<_Page> {
             borderRadius: BorderRadius.circular(16),
             selectedColor: Colors.white,
             fillColor: Colors.deepPurpleAccent,
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.5),
             isSelected: List.generate(
               3,

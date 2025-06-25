@@ -6,7 +6,8 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 /// It is customizable in size and returns the selected color via a callback.
 class ColorSelector extends StatelessWidget {
   final Color color; // The currently selected color
-  final ValueChanged<Color> onColorChanged; // Callback when a new color is selected
+  final ValueChanged<Color>
+  onColorChanged; // Callback when a new color is selected
   final double height; // Height of the color selector circle
   final double width; // Width of the color selector circle
 
