@@ -10,10 +10,8 @@ import 'package:flutter_neumorphic_ui/flutter_neumorphic_ui.dart';
 ///
 @immutable
 class LightSource {
-  final double
-  dx; // X-coordinate of the light source (-1 for left, 1 for right)
-  final double
-  dy; // Y-coordinate of the light source (-1 for top, 1 for bottom)
+  final double dx; // X-coordinate of the light source (-1 for left, 1 for right)
+  final double dy; // Y-coordinate of the light source (-1 for top, 1 for bottom)
 
   const LightSource(this.dx, this.dy);
 
@@ -23,28 +21,15 @@ class LightSource {
   // Predefined light source positions
   static const top = LightSource(0, -1); // Light source at top center
   static const topLeft = LightSource(-1, -1); // Light source at top-left corner
-  static const topRight = LightSource(
-    1,
-    -1,
-  ); // Light source at top-right corner
+  static const topRight = LightSource(1, -1); // Light source at top-right corner
   static const bottom = LightSource(0, 1); // Light source at bottom center
-  static const bottomLeft = LightSource(
-    -1,
-    1,
-  ); // Light source at bottom-left corner
-  static const bottomRight = LightSource(
-    1,
-    1,
-  ); // Light source at bottom-right corner
+  static const bottomLeft = LightSource(-1, 1); // Light source at bottom-left corner
+  static const bottomRight = LightSource(1, 1); // Light source at bottom-right corner
   static const left = LightSource(-1, 0); // Light source at left center
   static const right = LightSource(1, 0); // Light source at right center
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is LightSource &&
-          runtimeType == other.runtimeType &&
-          offset == other.offset; // Compares light sources based on offset
+  bool operator ==(Object other) => identical(this, other) || other is LightSource && runtimeType == other.runtimeType && offset == other.offset; // Compares light sources based on offset
 
   @override
   int get hashCode => offset.hashCode; // Generates hash code based on offset
@@ -64,9 +49,7 @@ class LightSource {
 
   /// Interpolates between two LightSource instances
   static LightSource? lerp(LightSource? a, LightSource? b, double t) {
-    if (a == null && b == null) {
-      return null; // Returns null if both inputs are null
-    }
+    if (a == null && b == null) return null; // Returns null if both inputs are null
     if (a == null) return b; // Returns b if a is null
     if (b == null) return a; // Returns a if b is null
     if (a == b) return a; // Returns a if both are equal

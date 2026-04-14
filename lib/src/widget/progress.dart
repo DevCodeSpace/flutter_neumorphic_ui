@@ -16,18 +16,14 @@ import 'container.dart';
 ///
 class ProgressStyle {
   final double depth; // Defines the depth effect for the neumorphic style
-  final BorderRadius
-  borderRadius; // Sets the border radius for the progress bar
-  final BorderRadius?
-  gradientBorderRadius; // Optional custom border radius for the gradient
+  final BorderRadius borderRadius; // Sets the border radius for the progress bar
+  final BorderRadius? gradientBorderRadius; // Optional custom border radius for the gradient
   final Color? accent; // Accent color for the progress gradient
   final Color? variant; // Variant color for the progress gradient
   final LightSource? lightSource; // Light source for the neumorphic effect
 
-  final AlignmentGeometry?
-  progressGradientStart; // Starting alignment for the gradient
-  final AlignmentGeometry?
-  progressGradientEnd; // Ending alignment for the gradient
+  final AlignmentGeometry? progressGradientStart; // Starting alignment for the gradient
+  final AlignmentGeometry? progressGradientEnd; // Ending alignment for the gradient
   final bool disableDepth; // Flag to disable the depth effect
 
   final NeumorphicBorder border; // Border style for the progress bar
@@ -109,28 +105,20 @@ class NeumorphicProgress extends StatefulWidget {
   @override
   _NeumorphicProgressState createState() => _NeumorphicProgressState();
 
-  double? get percent =>
-      _percent?.clamp(0, 1); // Clamps percent value between 0 and 1
+  double? get percent => _percent?.clamp(0, 1); // Clamps percent value between 0 and 1
 
   @override
   // ignore: invalid_override_of_non_virtual_member
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is NeumorphicProgress &&
-          runtimeType == other.runtimeType &&
-          percent == other.percent &&
-          height == other.height &&
-          style == other.style &&
-          curve == other.curve;
+      other is NeumorphicProgress && runtimeType == other.runtimeType && percent == other.percent && height == other.height && style == other.style && curve == other.curve;
 
   @override
   // ignore: invalid_override_of_non_virtual_member
-  int get hashCode =>
-      percent.hashCode ^ height.hashCode ^ style.hashCode ^ curve.hashCode;
+  int get hashCode => percent.hashCode ^ height.hashCode ^ style.hashCode ^ curve.hashCode;
 }
 
-class _NeumorphicProgressState extends State<NeumorphicProgress>
-    with TickerProviderStateMixin {
+class _NeumorphicProgressState extends State<NeumorphicProgress> with TickerProviderStateMixin {
   double? oldPercent = 0; // Stores the previous percent value for animation
 
   late AnimationController _controller; // Controls the animation
@@ -142,10 +130,7 @@ class _NeumorphicProgressState extends State<NeumorphicProgress>
     // Initializes the animation controller with the provided duration
     _controller = AnimationController(vsync: this, duration: widget.duration);
     // Sets up the animation tween from the current to the old percent
-    _animation = Tween<double>(
-      begin: widget.percent,
-      end: oldPercent,
-    ).animate(_controller);
+    _animation = Tween<double>(begin: widget.percent, end: oldPercent).animate(_controller);
   }
 
   @override
@@ -155,10 +140,7 @@ class _NeumorphicProgressState extends State<NeumorphicProgress>
       _controller.reset(); // Resets the animation controller
       oldPercent = oldWidget.percent; // Stores the old percent value
       // Creates a new tween for the updated percent value
-      _animation = Tween<double>(
-        begin: oldPercent,
-        end: widget.percent,
-      ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
+      _animation = Tween<double>(begin: oldPercent, end: widget.percent).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
       _controller.forward(); // Starts the animation
     }
     super.didUpdateWidget(oldWidget);
@@ -184,9 +166,7 @@ class _NeumorphicProgressState extends State<NeumorphicProgress>
         child: Neumorphic(
           padding: EdgeInsets.zero, // Removes padding
           style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(
-              widget.style.borderRadius,
-            ), // Sets the shape
+            boxShape: NeumorphicBoxShape.roundRect(widget.style.borderRadius), // Sets the shape
             disableDepth: widget.style.disableDepth, // Applies depth setting
             border: widget.style.border, // Applies border style
             depth: widget.style.depth, // Applies depth effect
@@ -194,24 +174,16 @@ class _NeumorphicProgressState extends State<NeumorphicProgress>
           ),
           child: AnimatedBuilder(
             animation: _controller, // Listens to animation changes
-            builder: (_, __) {
+            builder: (_, _) {
               return FractionallySizedBox(
                 alignment: Alignment.centerLeft, // Aligns progress to the left
-                widthFactor:
-                    _animation.value, // Sets width based on animation value
+                widthFactor: _animation.value, // Sets width based on animation value
                 child: _GradientProgress(
-                  borderRadius:
-                      widget.style.gradientBorderRadius ??
-                      widget.style.borderRadius, // Applies border radius
-                  begin:
-                      widget.style.progressGradientStart ??
-                      Alignment.centerLeft, // Gradient start alignment
-                  end:
-                      widget.style.progressGradientEnd ??
-                      Alignment.centerRight, // Gradient end alignment
+                  borderRadius: widget.style.gradientBorderRadius ?? widget.style.borderRadius, // Applies border radius
+                  begin: widget.style.progressGradientStart ?? Alignment.centerLeft, // Gradient start alignment
+                  end: widget.style.progressGradientEnd ?? Alignment.centerRight, // Gradient end alignment
                   colors: [
-                    widget.style.variant ??
-                        theme.variantColor, // Gradient colors
+                    widget.style.variant ?? theme.variantColor, // Gradient colors
                     widget.style.accent ?? theme.accentColor,
                   ],
                 ),
@@ -273,17 +245,10 @@ class NeumorphicProgressIndeterminate extends StatefulWidget {
 
   @override
   // ignore: invalid_override_of_non_virtual_member
-  int get hashCode =>
-      height.hashCode ^
-      style.hashCode ^
-      duration.hashCode ^
-      reverse.hashCode ^
-      curve.hashCode;
+  int get hashCode => height.hashCode ^ style.hashCode ^ duration.hashCode ^ reverse.hashCode ^ curve.hashCode;
 }
 
-class _NeumorphicProgressIndeterminateState
-    extends State<NeumorphicProgressIndeterminate>
-    with TickerProviderStateMixin {
+class _NeumorphicProgressIndeterminateState extends State<NeumorphicProgressIndeterminate> with TickerProviderStateMixin {
   late AnimationController _controller; // Controls the indeterminate animation
   late Animation _animation; // Defines the animation for indeterminate progress
 
@@ -293,19 +258,14 @@ class _NeumorphicProgressIndeterminateState
     // Initializes the animation controller with the provided duration
     _controller = AnimationController(vsync: this, duration: widget.duration);
     // Sets up the animation tween from 0 to 1
-    _animation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
+    _animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
     _loop(); // Starts the animation loop
   }
 
   void _loop() async {
     try {
       // Repeats the animation with optional reverse
-      await _controller
-          .repeat(min: 0, max: 1, reverse: widget.reverse)
-          .orCancel;
+      await _controller.repeat(min: 0, max: 1, reverse: widget.reverse).orCancel;
     } on TickerCanceled {}
   }
 
@@ -327,12 +287,8 @@ class _NeumorphicProgressIndeterminateState
         child: Neumorphic(
           padding: EdgeInsets.zero, // Removes padding
           style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.roundRect(
-              widget.style.borderRadius,
-            ), // Sets the shape
-            lightSource:
-                widget.style.lightSource ??
-                theme.lightSource, // Applies light source
+            boxShape: NeumorphicBoxShape.roundRect(widget.style.borderRadius), // Sets the shape
+            lightSource: widget.style.lightSource ?? theme.lightSource, // Applies light source
             border: widget.style.border, // Applies border style
             disableDepth: widget.style.disableDepth, // Applies depth setting
             depth: widget.style.depth, // Applies depth effect
@@ -342,30 +298,21 @@ class _NeumorphicProgressIndeterminateState
             builder: (context, constraints) {
               return AnimatedBuilder(
                 animation: _animation, // Listens to animation changes
-                builder: (_, __) {
+                builder: (_, _) {
                   return Padding(
                     padding: EdgeInsets.only(
-                      left:
-                          constraints.maxWidth *
-                          _animation.value, // Animates left padding
+                      left: constraints.maxWidth * _animation.value, // Animates left padding
                     ),
                     child: FractionallySizedBox(
                       heightFactor: 1, // Full height
                       alignment: Alignment.centerLeft, // Aligns to the left
                       widthFactor: _animation.value, // Animates width
                       child: _GradientProgress(
-                        borderRadius:
-                            widget.style.gradientBorderRadius ??
-                            widget.style.borderRadius, // Applies border radius
-                        begin:
-                            widget.style.progressGradientStart ??
-                            Alignment.centerLeft, // Gradient start alignment
-                        end:
-                            widget.style.progressGradientEnd ??
-                            Alignment.centerRight, // Gradient end alignment
+                        borderRadius: widget.style.gradientBorderRadius ?? widget.style.borderRadius, // Applies border radius
+                        begin: widget.style.progressGradientStart ?? Alignment.centerLeft, // Gradient start alignment
+                        end: widget.style.progressGradientEnd ?? Alignment.centerRight, // Gradient end alignment
                         colors: [
-                          widget.style.accent ??
-                              theme.accentColor, // Gradient colors
+                          widget.style.accent ?? theme.accentColor, // Gradient colors
                           widget.style.variant ?? theme.variantColor,
                         ],
                       ),
@@ -392,19 +339,10 @@ class _GradientProgress extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: borderRadius, // Applies border radius
-        gradient: LinearGradient(
-          begin: begin,
-          end: end,
-          colors: colors,
-        ), // Applies gradient
+        gradient: LinearGradient(begin: begin, end: end, colors: colors), // Applies gradient
       ),
     );
   }
 
-  const _GradientProgress({
-    required this.begin,
-    required this.end,
-    required this.colors,
-    required this.borderRadius,
-  });
+  const _GradientProgress({required this.begin, required this.end, required this.colors, required this.borderRadius});
 }

@@ -19,12 +19,7 @@ class _WidgetPageState extends State<RadioButtonWidgetPage> {
   Widget build(BuildContext context) {
     return NeumorphicTheme(
       themeMode: ThemeMode.light,
-      theme: NeumorphicThemeData(
-        lightSource: LightSource.topLeft,
-        accentColor: NeumorphicColors.accent,
-        depth: 4,
-        intensity: 0.5,
-      ),
+      theme: NeumorphicThemeData(lightSource: LightSource.topLeft, accentColor: NeumorphicColors.accent, depth: 4, intensity: 0.5),
       child: _Page(), // Main content widget
     );
   }
@@ -68,7 +63,7 @@ class _DefaultWidget extends StatefulWidget {
 }
 
 class _DefaultWidgetState extends State<_DefaultWidget> {
-  var groupValue; // Tracks the currently selected value
+  int? groupValue; // Tracks the currently selected value
 
   /// Shows code snippet for this example
   Widget _buildCode(BuildContext context) {
@@ -94,10 +89,7 @@ NeumorphicRadio(
       padding: EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            "Default",
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text("Default", style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           SizedBox(width: 12),
 
           /// First radio button
@@ -149,10 +141,7 @@ NeumorphicRadio(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -165,7 +154,7 @@ class CircleRadios extends StatefulWidget {
 }
 
 class _CircleRadiosState extends State<CircleRadios> {
-  var groupValue; // Tracks selected circle radio value
+  String? groupValue; // Tracks selected circle radio value
 
   /// Shows code snippet
   Widget _buildCode(BuildContext context) {
@@ -192,10 +181,7 @@ NeumorphicRadio(
       padding: EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            "Circle",
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text("Circle", style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           SizedBox(width: 12),
 
           /// Circle Radio A
@@ -250,10 +236,7 @@ NeumorphicRadio(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }
 
@@ -264,7 +247,7 @@ class _EnabledDisabledWidget extends StatefulWidget {
 }
 
 class _EnabledDisabledWidgetState extends State<_EnabledDisabledWidget> {
-  var groupValue; // Tracks selection between enabled/disabled radios
+  int? groupValue; // Tracks selection between enabled/disabled radios
 
   /// UI widget with one active and one disabled radio
   Widget _buildWidget(BuildContext context) {
@@ -272,10 +255,7 @@ class _EnabledDisabledWidgetState extends State<_EnabledDisabledWidget> {
       padding: EdgeInsets.all(12),
       child: Row(
         children: <Widget>[
-          Text(
-            "Enabled :",
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text("Enabled :", style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           SizedBox(width: 12),
 
           /// Active radio button
@@ -293,10 +273,7 @@ class _EnabledDisabledWidgetState extends State<_EnabledDisabledWidget> {
 
           SizedBox(width: 24),
 
-          Text(
-            "Disabled :",
-            style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-          ),
+          Text("Disabled :", style: TextStyle(color: NeumorphicTheme.defaultTextColor(context))),
           SizedBox(width: 12),
 
           /// Disabled radio button (not clickable)
@@ -338,9 +315,6 @@ NeumorphicRadio(
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[_buildWidget(context), _buildCode(context)],
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[_buildWidget(context), _buildCode(context)]);
   }
 }

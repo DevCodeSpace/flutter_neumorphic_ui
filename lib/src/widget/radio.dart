@@ -3,10 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'button.dart';
 import 'container.dart';
 
-typedef NeumorphicRadioListener<T> =
-    void Function(
-      T value,
-    ); // Defines a callback type for handling radio value changes
+typedef NeumorphicRadioListener<T> = void Function(T value); // Defines a callback type for handling radio value changes
 
 /// A Style used to customize a [NeumorphicRadio]
 ///
@@ -27,12 +24,10 @@ class NeumorphicRadioStyle {
   final bool disableDepth; // Flag to disable depth effect
 
   final Color? selectedColor; // Color when selected (null for default)
-  final Color?
-  unselectedColor; // Color when unselected (null for unchanged color)
+  final Color? unselectedColor; // Color when unselected (null for unchanged color)
 
   final double? intensity; // Intensity of the neumorphic effect
-  final NeumorphicShape?
-  shape; // Shape of the neumorphic effect (concave, convex, flat)
+  final NeumorphicShape? shape; // Shape of the neumorphic effect (concave, convex, flat)
 
   final NeumorphicBorder border; // Border style for the radio
   final NeumorphicBoxShape? boxShape; // Box shape for the radio
@@ -161,8 +156,7 @@ class NeumorphicRadio<T> extends StatelessWidget {
   final T? groupValue; // Current selected value in the group
   final EdgeInsets padding; // Padding around the radio button
   final NeumorphicRadioStyle style; // Custom style for the radio button
-  final NeumorphicRadioListener<T?>?
-  onChanged; // Callback when the radio is toggled
+  final NeumorphicRadioListener<T?>? onChanged; // Callback when the radio is toggled
   final bool isEnabled; // Flag to enable or disable the radio
 
   final Duration duration; // Animation duration for state changes
@@ -181,17 +175,15 @@ class NeumorphicRadio<T> extends StatelessWidget {
     this.isEnabled = true,
   });
 
-  bool get isSelected =>
-      this.value != null &&
-      this.value == this.groupValue; // Checks if the radio is selected
+  bool get isSelected => value != null && value == groupValue; // Checks if the radio is selected
 
   void _onClick() {
-    if (this.onChanged != null) {
-      if (this.value == this.groupValue) {
+    if (onChanged != null) {
+      if (value == groupValue) {
         //unselect
-        this.onChanged!(null); // Calls callback with null to unselect
+        onChanged!(null); // Calls callback with null to unselect
       } else {
-        this.onChanged!(this.value); // Calls callback with the selected value
+        onChanged!(value); // Calls callback with the selected value
       }
     }
   }
@@ -202,22 +194,20 @@ class NeumorphicRadio<T> extends StatelessWidget {
     final NeumorphicThemeData theme = NeumorphicTheme.currentTheme(context);
 
     // Sets the depth for selected state (negative for pressed effect)
-    final double selectedDepth =
-        -1 * (this.style.selectedDepth ?? theme.depth).abs();
+    final double selectedDepth = -1 * (style.selectedDepth ?? theme.depth).abs();
     // Sets the depth for unselected state
-    final double unselectedDepth = (this.style.unselectedDepth ?? theme.depth)
-        .abs();
+    final double unselectedDepth = (style.unselectedDepth ?? theme.depth).abs();
 
     // Determines the depth based on selection state
     double depth = isSelected ? selectedDepth : unselectedDepth;
-    if (!this.isEnabled) {
+    if (!isEnabled) {
       depth = 0; // Disables depth effect if radio is disabled
     }
 
     // Sets the color for unselected state (falls back to theme base color)
-    final Color unselectedColor = this.style.unselectedColor ?? theme.baseColor;
+    final Color unselectedColor = style.unselectedColor ?? theme.baseColor;
     // Sets the color for selected state (falls back to unselected color)
-    final Color selectedColor = this.style.selectedColor ?? unselectedColor;
+    final Color selectedColor = style.selectedColor ?? unselectedColor;
 
     // Determines the color based on selection state
     final Color color = isSelected ? selectedColor : unselectedColor;
@@ -226,25 +216,22 @@ class NeumorphicRadio<T> extends StatelessWidget {
       onPressed: () {
         _onClick(); // Handles click event
       },
-      duration: this.duration, // Applies animation duration
-      curve: this.curve, // Applies animation curve
-      padding: this.padding, // Applies padding
+      duration: duration, // Applies animation duration
+      curve: curve, // Applies animation curve
+      padding: padding, // Applies padding
       pressed: isSelected, // Sets pressed state based on selection
       minDistance: selectedDepth, // Sets minimum depth for pressed state
       style: NeumorphicStyle(
-        border: this.style.border, // Applies border style
+        border: style.border, // Applies border style
         color: color, // Applies determined color
-        boxShape: this.style.boxShape, // Applies box shape
-        lightSource:
-            this.style.lightSource ?? theme.lightSource, // Applies light source
-        disableDepth: this.style.disableDepth, // Applies depth disable setting
-        intensity: this.style.intensity, // Applies intensity
+        boxShape: style.boxShape, // Applies box shape
+        lightSource: style.lightSource ?? theme.lightSource, // Applies light source
+        disableDepth: style.disableDepth, // Applies depth disable setting
+        intensity: style.intensity, // Applies intensity
         depth: depth, // Applies determined depth
-        shape:
-            this.style.shape ??
-            NeumorphicShape.flat, // Applies shape (defaults to flat)
+        shape: style.shape ?? NeumorphicShape.flat, // Applies shape (defaults to flat)
       ),
-      child: this.child, // Renders the child widget
+      child: child, // Renders the child widget
     );
   }
 }

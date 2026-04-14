@@ -136,7 +136,7 @@ class NeumorphicCheckbox extends StatelessWidget {
   // Callback triggered when the checkbox value changes
   final NeumorphicCheckboxListener onChanged;
   // Whether the checkbox is enabled
-  final isEnabled;
+  final bool isEnabled;
   // Padding inside the checkbox
   final EdgeInsets padding;
   // Margin outside the checkbox
@@ -154,10 +154,7 @@ class NeumorphicCheckbox extends StatelessWidget {
     required this.onChanged, // Required change callback
     this.curve = Neumorphic.defaultCurve, // Default animation curve
     this.duration = Neumorphic.defaultDuration, // Default animation duration
-    this.padding = const EdgeInsets.symmetric(
-      horizontal: 16.0,
-      vertical: 12.0,
-    ), // Default padding
+    this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0), // Default padding
     this.margin = const EdgeInsets.all(0), // Default margin
     this.isEnabled = true, // Default to enabled
   });
@@ -179,21 +176,13 @@ class NeumorphicCheckbox extends StatelessWidget {
     final selectedColor = style.selectedColor ?? theme.accentColor;
 
     // Calculate selected depth (negative absolute value)
-    final double selectedDepth =
-        -1 * (style.selectedDepth ?? theme.depth).abs();
+    final double selectedDepth = -1 * (style.selectedDepth ?? theme.depth).abs();
     // Calculate unselected depth (absolute value)
     final double unselectedDepth = (style.unselectedDepth ?? theme.depth).abs();
     // Clamp selected intensity to valid range
-    final double selectedIntensity =
-        (style.selectedIntensity ?? theme.intensity).abs().clamp(
-          Neumorphic.minIntensity,
-          Neumorphic.maxIntensity,
-        );
+    final double selectedIntensity = (style.selectedIntensity ?? theme.intensity).abs().clamp(Neumorphic.minIntensity, Neumorphic.maxIntensity);
     // Clamp unselected intensity to valid range
-    final double unselectedIntensity = style.unselectedIntensity.clamp(
-      Neumorphic.minIntensity,
-      Neumorphic.maxIntensity,
-    );
+    final double unselectedIntensity = style.unselectedIntensity.clamp(Neumorphic.minIntensity, Neumorphic.maxIntensity);
 
     // Determine current depth based on selection state
     double depth = isSelected ? selectedDepth : unselectedDepth;
@@ -232,19 +221,12 @@ class NeumorphicCheckbox extends StatelessWidget {
         border: style.border, // Apply border
         color: color, // Apply background color
         depth: depth, // Apply current depth
-        lightSource:
-            style.lightSource ?? theme.lightSource, // Apply light source
+        lightSource: style.lightSource ?? theme.lightSource, // Apply light source
         disableDepth: style.disableDepth, // Apply depth disable flag
-        intensity: isSelected
-            ? selectedIntensity
-            : unselectedIntensity, // Apply intensity
+        intensity: isSelected ? selectedIntensity : unselectedIntensity, // Apply intensity
         shape: NeumorphicShape.flat, // Use flat shape
       ),
-      child: Icon(
-        Icons.check,
-        color: iconColor,
-        size: 20.0,
-      ), // Display check icon
+      child: Icon(Icons.check, color: iconColor, size: 20.0), // Display check icon
     );
   }
 }

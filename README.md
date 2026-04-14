@@ -7,16 +7,19 @@ Inspired by skeuomorphic design principles, this package provides a modern, adap
 ---
 <img src="assets/banner.jpg" alt="flutter_neumorphic_ui" />
 
+---
+
 ## ✨ Features
 
-🌑 Light & Dark mode support  
-🌕 Adjustable `depth`, `intensity`, `surfaceIntensity`  
-🌈 Full color customization  
-🧱 Widget-level control: Text, Icon, Button, Container, Slider, Toggle, etc.  
-📐 Shape and box style customization (circle, stadium, beveled, etc.)  
-🎛️ Interactive LightSource manipulation (dx, dy)  
-👶 Beginner-friendly API  
+- 🌑 Light & Dark mode support  
+- 🌕 Adjustable `depth`, `intensity`, `surfaceIntensity`  
+- 🌈 Full color customization  
+- 🧱 Widget-level control: Text, Icon, Button, Container, Slider, Toggle, etc.  
+- 📐 Shape and box style customization (circle, stadium, beveled, etc.)  
+- 🎛️ Interactive LightSource manipulation (dx, dy)  
+- 👶 Beginner-friendly API  
 
+---
 
 ## 🚀 Installation
 
@@ -178,5 +181,10 @@ NeumorphicTheme(
   child: MyHomePage(),
 )
 ```
+
+---
 ## 🤝 Contributions
   <img src="assets/contributors.png" width="230">
+  
+---
+

@@ -65,13 +65,10 @@ class NeumorphicAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.leading, // Optional leading widget
     this.automaticallyImplyLeading = true, // Default to imply leading widget
     this.centerTitle, // Optional center title flag
-    this.titleSpacing =
-        NavigationToolbar.kMiddleSpacing, // Default title spacing
+    this.titleSpacing = NavigationToolbar.kMiddleSpacing, // Default title spacing
     this.actionSpacing = defaultSpacing, // Default action spacing
     this.padding = 16, // Default padding
-  }) : preferredSize = const Size.fromHeight(
-         toolbarHeight,
-       ); // Set preferred height
+  }) : preferredSize = const Size.fromHeight(toolbarHeight); // Set preferred height
 
   // Creates the state for managing the app bar
   @override
@@ -106,8 +103,7 @@ class NeumorphicAppBarTheme extends InheritedWidget {
   final Widget child;
 
   // Constructor for initializing the theme
-  const NeumorphicAppBarTheme({super.key, required this.child})
-    : super(child: child);
+  const NeumorphicAppBarTheme({super.key, required this.child}) : super(child: child);
 
   // Determines if dependent widgets should be notified of updates
   @override
@@ -131,16 +127,13 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
     final nTheme = NeumorphicTheme.of(context);
     // Get parent route for navigation context
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
-    final bool canPop =
-        parentRoute?.canPop ?? false; // Check if navigation can pop
+    final bool canPop = parentRoute?.canPop ?? false; // Check if navigation can pop
     // Determine if a close button should be used for fullscreen dialogs
-    final bool useCloseButton =
-        parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
+    final bool useCloseButton = parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
     // Get scaffold state for drawer information
     final ScaffoldState? scaffold = Scaffold.maybeOf(context);
     final bool hasDrawer = scaffold?.hasDrawer ?? false; // Check for drawer
-    final bool hasEndDrawer =
-        scaffold?.hasEndDrawer ?? false; // Check for end drawer
+    final bool hasEndDrawer = scaffold?.hasEndDrawer ?? false; // Check for end drawer
 
     // Initialize leading widget
     Widget? leading = widget.leading;
@@ -159,14 +152,8 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
         if (canPop) {
           // Use close or back button based on dialog state
           leading = useCloseButton
-              ? NeumorphicCloseButton(
-                  padding: widget.buttonPadding,
-                  style: widget.buttonStyle,
-                )
-              : NeumorphicBackButton(
-                  padding: widget.buttonPadding,
-                  style: widget.buttonStyle,
-                );
+              ? NeumorphicCloseButton(padding: widget.buttonPadding, style: widget.buttonStyle)
+              : NeumorphicBackButton(padding: widget.buttonPadding, style: widget.buttonStyle);
         }
       }
     }
@@ -181,17 +168,13 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
     // Initialize title widget
     Widget? title = widget.title;
     if (title != null) {
-      final AppBarTheme appBarTheme = AppBarTheme.of(context);
+      final AppBarThemeData appBarTheme = AppBarTheme.of(context);
       final TextTheme textTheme = Theme.of(context).textTheme;
 
-      // Apply text style to title
       title = DefaultTextStyle(
-        style: (textTheme.headlineSmall!).merge(
-          widget.textStyle ??
-              nTheme?.current?.appBarTheme.textStyle, // Merge styles
-        ),
+        style: (textTheme.headlineSmall!).merge(widget.textStyle ?? nTheme?.current?.appBarTheme.textStyle),
         softWrap: false,
-        overflow: TextOverflow.ellipsis, // Handle overflow
+        overflow: TextOverflow.ellipsis,
         child: title,
       );
     }
@@ -206,14 +189,9 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
         children: widget.actions!
             .map(
               (child) => Padding(
-                padding: EdgeInsets.only(
-                  left: widget.actionSpacing,
-                ), // Apply action spacing
+                padding: EdgeInsets.only(left: widget.actionSpacing), // Apply action spacing
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints.tightFor(
-                    width: kToolbarHeight,
-                    height: kToolbarHeight,
-                  ),
+                  constraints: const BoxConstraints.tightFor(width: kToolbarHeight, height: kToolbarHeight),
                   child: child, // Constrain action size
                 ),
               ),
@@ -223,10 +201,7 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
     } else if (hasEndDrawer) {
       // Use menu icon button for end drawer
       actions = ConstrainedBox(
-        constraints: const BoxConstraints.tightFor(
-          width: kToolbarHeight,
-          height: kToolbarHeight,
-        ),
+        constraints: const BoxConstraints.tightFor(width: kToolbarHeight, height: kToolbarHeight),
         child: NeumorphicButton(
           padding: widget.buttonPadding,
           style: widget.buttonStyle,
@@ -239,9 +214,7 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
 
     // Build the app bar structure
     return Container(
-      color:
-          widget.color ??
-          nTheme?.current?.appBarTheme.color, // Apply background color
+      color: widget.color ?? nTheme?.current?.appBarTheme.color, // Apply background color
       child: SafeArea(
         bottom: false, // Exclude bottom safe area
         child: NeumorphicAppBarTheme(
@@ -250,20 +223,14 @@ class NeumorphicAppBarState extends State<NeumorphicAppBar> {
             child: IconTheme(
               data:
                   widget.iconTheme ?? // Use widget's icon theme if provided
-                  nTheme
-                      ?.current
-                      ?.appBarTheme
-                      .iconTheme ?? // Fallback to neumorphic app bar theme
+                  nTheme?.current?.appBarTheme.iconTheme ?? // Fallback to neumorphic app bar theme
                   nTheme?.current?.iconTheme ?? // Fallback to neumorphic theme
                   const IconThemeData(), // Default empty icon theme
               child: NavigationToolbar(
                 leading: leading, // Leading widget
                 middle: title, // Title widget
                 trailing: actions, // Actions widget
-                centerMiddle: widget._getEffectiveCenterTitle(
-                  theme,
-                  nTheme!.current!,
-                ), // Center title based on effective setting
+                centerMiddle: widget._getEffectiveCenterTitle(theme, nTheme!.current!), // Center title based on effective setting
                 middleSpacing: widget.titleSpacing, // Apply title spacing
               ),
             ),
