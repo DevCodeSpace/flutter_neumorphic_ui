@@ -55,14 +55,7 @@ class IndicatorStyle {
 
   // Generates hash code for the style
   @override
-  int get hashCode =>
-      depth.hashCode ^
-      disableDepth.hashCode ^
-      accent.hashCode ^
-      variant.hashCode ^
-      lightSource.hashCode ^
-      gradientStart.hashCode ^
-      gradientEnd.hashCode;
+  int get hashCode => depth.hashCode ^ disableDepth.hashCode ^ accent.hashCode ^ variant.hashCode ^ lightSource.hashCode ^ gradientStart.hashCode ^ gradientEnd.hashCode;
 }
 
 // Enum to define the orientation of the indicator
@@ -132,15 +125,12 @@ class NeumorphicIndicator extends StatefulWidget {
   const NeumorphicIndicator({
     super.key,
     this.percent = 0.5, // Default to 50%
-    this.orientation =
-        NeumorphicIndicatorOrientation.vertical, // Default to vertical
+    this.orientation = NeumorphicIndicatorOrientation.vertical, // Default to vertical
     this.height = double.maxFinite, // Default to maximum height
     this.padding = EdgeInsets.zero, // Default to no padding
     this.width = double.maxFinite, // Default to maximum width
     this.style = const IndicatorStyle(), // Default style
-    this.duration = const Duration(
-      milliseconds: 300,
-    ), // Default animation duration
+    this.duration = const Duration(milliseconds: 300), // Default animation duration
     this.curve = Curves.easeOutCubic, // Default animation curve
   });
 
@@ -169,20 +159,11 @@ class NeumorphicIndicator extends StatefulWidget {
   @override
   // ignore: invalid_override_of_non_virtual_member
   int get hashCode =>
-      super.hashCode ^
-      percent.hashCode ^
-      width.hashCode ^
-      height.hashCode ^
-      padding.hashCode ^
-      orientation.hashCode ^
-      style.hashCode ^
-      duration.hashCode ^
-      curve.hashCode;
+      super.hashCode ^ percent.hashCode ^ width.hashCode ^ height.hashCode ^ padding.hashCode ^ orientation.hashCode ^ style.hashCode ^ duration.hashCode ^ curve.hashCode;
 }
 
 // State class for managing the NeumorphicIndicator's animation
-class _NeumorphicIndicatorState extends State<NeumorphicIndicator>
-    with TickerProviderStateMixin {
+class _NeumorphicIndicatorState extends State<NeumorphicIndicator> with TickerProviderStateMixin {
   // Stores the previous percentage value
   double oldPercent = 0;
   // Controller for managing the animation
@@ -197,10 +178,7 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator>
     // Create animation controller with specified duration
     _controller = AnimationController(vsync: this, duration: widget.duration);
     // Initialize animation with current percentage
-    _animation = Tween<double>(
-      begin: widget.percent,
-      end: oldPercent,
-    ).animate(_controller);
+    _animation = Tween<double>(begin: widget.percent, end: oldPercent).animate(_controller);
   }
 
   // Updates the animation when the widget's properties change
@@ -211,10 +189,7 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator>
       _controller.reset();
       oldPercent = oldWidget.percent; // Store previous percentage
       // Create new animation from old to new percentage
-      _animation = Tween<double>(
-        begin: oldPercent,
-        end: widget.percent,
-      ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
+      _animation = Tween<double>(begin: oldPercent, end: widget.percent).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
       // Start the animation
       _controller.forward();
     }
@@ -242,32 +217,25 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator>
         padding: EdgeInsets.zero, // No padding for outer container
         style: NeumorphicStyle(
           boxShape: NeumorphicBoxShape.stadium(), // Use stadium shape
-          lightSource:
-              widget.style.lightSource ??
-              theme.lightSource, // Apply light source
+          lightSource: widget.style.lightSource ?? theme.lightSource, // Apply light source
           disableDepth: widget.style.disableDepth, // Apply depth disable flag
           depth: widget.style.depth, // Apply depth
           shape: NeumorphicShape.flat, // Use flat shape
         ),
         child: AnimatedBuilder(
           animation: _animation, // Rebuild when animation changes
-          builder: (_, __) {
+          builder: (_, _) {
             // Size the indicator based on percentage and orientation
             return FractionallySizedBox(
-              heightFactor:
-                  widget.orientation == NeumorphicIndicatorOrientation.vertical
+              heightFactor: widget.orientation == NeumorphicIndicatorOrientation.vertical
                   ? _animation
                         .value // Scale height for vertical
                   : 1, // Full height for horizontal
-              widthFactor:
-                  widget.orientation ==
-                      NeumorphicIndicatorOrientation.horizontal
+              widthFactor: widget.orientation == NeumorphicIndicatorOrientation.horizontal
                   ? _animation
                         .value // Scale width for horizontal
                   : 1, // Full width for vertical
-              alignment:
-                  widget.orientation ==
-                      NeumorphicIndicatorOrientation.horizontal
+              alignment: widget.orientation == NeumorphicIndicatorOrientation.horizontal
                   ? Alignment
                         .centerLeft // Align left for horizontal
                   : Alignment.bottomCenter, // Align bottom for vertical
@@ -276,24 +244,16 @@ class _NeumorphicIndicatorState extends State<NeumorphicIndicator>
                 child: Neumorphic(
                   style: NeumorphicStyle(
                     boxShape: NeumorphicBoxShape.stadium(), // Use stadium shape
-                    lightSource:
-                        widget.style.lightSource ??
-                        theme.lightSource, // Apply light source
+                    lightSource: widget.style.lightSource ?? theme.lightSource, // Apply light source
                   ),
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        begin:
-                            widget.style.gradientStart ??
-                            Alignment.topCenter, // Gradient start
-                        end:
-                            widget.style.gradientEnd ??
-                            Alignment.bottomCenter, // Gradient end
+                        begin: widget.style.gradientStart ?? Alignment.topCenter, // Gradient start
+                        end: widget.style.gradientEnd ?? Alignment.bottomCenter, // Gradient end
                         colors: [
-                          widget.style.accent ??
-                              theme.accentColor, // Accent color
-                          widget.style.variant ??
-                              theme.variantColor, // Variant color
+                          widget.style.accent ?? theme.accentColor, // Accent color
+                          widget.style.variant ?? theme.variantColor, // Variant color
                         ],
                       ),
                     ),

@@ -12,22 +12,17 @@ class TipsHome extends StatelessWidget {
   const TipsHome({super.key});
 
   // Builds a neumorphic button with consistent styling
-  Widget _buildButton(context, {String? text, VoidCallback? onClick}) {
+  Widget _buildButton(BuildContext context, {String? text, VoidCallback? onClick}) {
     // Creates a neumorphic button with customizable text and onClick callback
     return NeumorphicButton(
       margin: EdgeInsets.only(bottom: 12), // Adds bottom margin for spacing
-      padding: EdgeInsets.symmetric(
-        vertical: 18,
-        horizontal: 24,
-      ), // Sets vertical and horizontal padding
+      padding: EdgeInsets.symmetric(vertical: 18, horizontal: 24), // Sets vertical and horizontal padding
       style: NeumorphicStyle(
-        color: NeumorphicTheme.isUsingDark(context!)
+        color: NeumorphicTheme.isUsingDark(context)
             ? Colors.grey[800] // Darker color for dark theme
             : Colors.white,
         shape: NeumorphicShape.flat, // Uses flat shape for the button
-        boxShape: NeumorphicBoxShape.roundRect(
-          BorderRadius.circular(12),
-        ), // Applies rounded rectangle shape
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)), // Applies rounded rectangle shape
       ),
       onPressed: onClick, // Callback triggered on button press
       child: Center(
@@ -50,21 +45,16 @@ class TipsHome extends StatelessWidget {
     return NeumorphicTheme(
       theme: NeumorphicThemeData(depth: 8), // Sets depth for neumorphic shadow
       child: Scaffold(
-        backgroundColor:
-            NeumorphicColors.background, // Uses neumorphic background color
+        backgroundColor: NeumorphicColors.background, // Uses neumorphic background color
         body: SafeArea(
           // Ensures content avoids system UI areas
           child: SingleChildScrollView(
             // Enables scrolling for the content
             child: Padding(
-              padding: const EdgeInsets.all(
-                18.0,
-              ), // Adds padding around the content
+              padding: const EdgeInsets.all(18.0), // Adds padding around the content
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment
-                    .stretch, // Stretches children horizontally
-                mainAxisAlignment:
-                    MainAxisAlignment.start, // Aligns children at the start
+                crossAxisAlignment: CrossAxisAlignment.stretch, // Stretches children horizontally
+                mainAxisAlignment: MainAxisAlignment.start, // Aligns children at the start
                 mainAxisSize: MainAxisSize.max, // Maximizes column size
                 children: [
                   TopBar(title: "Tips"), // Displays the top bar with title

@@ -2,4 +2,8 @@
 ///
 /// @see https://github.com/Idean/Flutter-Neumorphic/#-shapes
 ///
-enum NeumorphicShape { concave, convex, flat }
+enum NeumorphicShape {
+  concave,
+  convex,
+  flat,
+}

@@ -49,15 +49,12 @@ class __PageState extends State<_Page> {
   double height = 150.0; // Widget height
   double width = 150.0; // Widget width
 
-  bool haveNeumorphicChild =
-      false; // Whether to include a child neumorphic widget
-  bool childOppositeLightsourceChild =
-      false; // Whether child uses opposite light source
+  bool haveNeumorphicChild = false; // Whether to include a child neumorphic widget
+  bool childOppositeLightsourceChild = false; // Whether child uses opposite light source
   bool drawAboveChild = false; // Whether to draw surface above child
   double childMargin = 5; // Margin for child widget
   double childDepth = 5; // Depth for child widget
-  int selectedConfiguratorIndex =
-      0; // Index for style/child configurator toggle
+  int selectedConfiguratorIndex = 0; // Index for style/child configurator toggle
 
   @override
   void initState() {
@@ -93,21 +90,14 @@ class __PageState extends State<_Page> {
   // Builds the custom app bar
   Widget _buildAppBar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 8,
-      ), // Padding
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Padding
       child: Row(
         children: [
           NeumorphicButton(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ), // Button padding
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Button padding
             style: NeumorphicStyle(
               shape: NeumorphicShape.flat, // Flat shape
-              boxShape:
-                  NeumorphicBoxShape.stadium(), // Stadium shape (rounded ends)
+              boxShape: NeumorphicBoxShape.stadium(), // Stadium shape (rounded ends)
               depth: 2, // Slight depth
               color: Colors.deepPurpleAccent, // Purple accent color
             ),
@@ -130,9 +120,7 @@ class __PageState extends State<_Page> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey[300], // Light grey background
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(20),
-        ), // Rounded top corners
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)), // Rounded top corners
         boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)], // Shadow
       ),
       padding: const EdgeInsets.only(top: 16, bottom: 32), // Padding
@@ -144,15 +132,12 @@ class __PageState extends State<_Page> {
             borderRadius: BorderRadius.circular(16), // Rounded corners
             selectedColor: Colors.white, // Selected text color
             fillColor: Colors.deepPurpleAccent, // Selected background color
-            // ignore: deprecated_member_use
-            color: Colors.black.withOpacity(0.5), // Unselected text color
+            color: Colors.black.withValues(alpha:0.5), // Unselected text color
             isSelected: List.generate(
               2,
               (index) => index == selectedConfiguratorIndex, // Selection state
             ),
-            onPressed: (index) => setState(
-              () => selectedConfiguratorIndex = index,
-            ), // Updates selection
+            onPressed: (index) => setState(() => selectedConfiguratorIndex = index), // Updates selection
             children: const [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
@@ -166,12 +151,8 @@ class __PageState extends State<_Page> {
           ),
           const SizedBox(height: 16), // Spacing
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ), // Horizontal padding
-            child:
-                _configuratorsChild() ??
-                const SizedBox(), // Configurator content
+            padding: const EdgeInsets.symmetric(horizontal: 16), // Horizontal padding
+            child: _configuratorsChild() ?? const SizedBox(), // Configurator content
           ),
         ],
       ),
@@ -228,9 +209,7 @@ class __PageState extends State<_Page> {
           onColorChanged: (color) {
             setState(() {
               // Updates theme base color
-              NeumorphicTheme.of(
-                context,
-              )?.updateCurrentTheme(NeumorphicThemeData(baseColor: color));
+              NeumorphicTheme.of(context)?.updateCurrentTheme(NeumorphicThemeData(baseColor: color));
             });
           },
           color: NeumorphicTheme.baseColor(context), // Current base color
@@ -279,8 +258,7 @@ class __PageState extends State<_Page> {
         surfaceIntensity: surfaceIntensity, // Same surface intensity
         depth: childDepth, // Child depth
         lightSource: lightSource, // Same light source
-        oppositeShadowLightSource:
-            childOppositeLightsourceChild, // Opposite light source option
+        oppositeShadowLightSource: childOppositeLightsourceChild, // Opposite light source option
       ),
       child: SizedBox.expand(), // Expands to fill space
     );
@@ -290,10 +268,7 @@ class __PageState extends State<_Page> {
   Widget depthSelector() {
     return Row(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text("Depth"),
-        ), // Label
+        Padding(padding: EdgeInsets.only(left: 12), child: Text("Depth")), // Label
         Expanded(
           child: Slider(
             min: Neumorphic.minDepth, // Minimum depth
@@ -318,10 +293,7 @@ class __PageState extends State<_Page> {
   Widget childDepthSelector() {
     return Row(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text("Child Depth"),
-        ), // Label
+        Padding(padding: EdgeInsets.only(left: 12), child: Text("Child Depth")), // Label
         Expanded(
           child: Slider(
             min: Neumorphic.minDepth, // Minimum depth
@@ -336,9 +308,7 @@ class __PageState extends State<_Page> {
         ),
         Padding(
           padding: EdgeInsets.only(right: 12),
-          child: Text(
-            childDepth.floor().toString(),
-          ), // Displays child depth value
+          child: Text(childDepth.floor().toString()), // Displays child depth value
         ),
       ],
     );
@@ -348,10 +318,7 @@ class __PageState extends State<_Page> {
   Widget childMarginSelector() {
     return Row(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text("Child Margin"),
-        ), // Label
+        Padding(padding: EdgeInsets.only(left: 12), child: Text("Child Margin")), // Label
         Expanded(
           child: Slider(
             min: 0, // Minimum margin
@@ -366,9 +333,7 @@ class __PageState extends State<_Page> {
         ),
         Padding(
           padding: EdgeInsets.only(right: 12),
-          child: Text(
-            childMargin.floor().toString(),
-          ), // Displays child margin value
+          child: Text(childMargin.floor().toString()), // Displays child margin value
         ),
       ],
     );
@@ -459,10 +424,7 @@ class __PageState extends State<_Page> {
   Widget intensitySelector() {
     return Row(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text("Intensity"),
-        ), // Label
+        Padding(padding: EdgeInsets.only(left: 12), child: Text("Intensity")), // Label
         Expanded(
           child: Slider(
             min: Neumorphic.minIntensity, // Minimum intensity
@@ -477,9 +439,7 @@ class __PageState extends State<_Page> {
         ),
         Padding(
           padding: EdgeInsets.only(right: 12),
-          child: Text(
-            ((intensity * 100).floor() / 100).toString(),
-          ), // Displays intensity value
+          child: Text(((intensity * 100).floor() / 100).toString()), // Displays intensity value
         ),
       ],
     );
@@ -489,10 +449,7 @@ class __PageState extends State<_Page> {
   Widget surfaceIntensitySelector() {
     return Row(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: Text("SurfaceIntensity"),
-        ), // Label
+        Padding(padding: EdgeInsets.only(left: 12), child: Text("SurfaceIntensity")), // Label
         Expanded(
           child: Slider(
             min: Neumorphic.minIntensity, // Minimum surface intensity
@@ -507,9 +464,7 @@ class __PageState extends State<_Page> {
         ),
         Padding(
           padding: EdgeInsets.only(right: 12),
-          child: Text(
-            ((surfaceIntensity * 100).floor() / 100).toString(),
-          ), // Displays surface intensity value
+          child: Text(((surfaceIntensity * 100).floor() / 100).toString()), // Displays surface intensity value
         ),
       ],
     );
@@ -529,9 +484,7 @@ class __PageState extends State<_Page> {
             value: lightSource.dx, // Current X value
             onChanged: (value) {
               setState(() {
-                lightSource = lightSource.copyWith(
-                  dx: value,
-                ); // Updates X position
+                lightSource = lightSource.copyWith(dx: value); // Updates X position
               });
             },
           ),
@@ -549,9 +502,7 @@ class __PageState extends State<_Page> {
               value: lightSource.dy, // Current Y value
               onChanged: (value) {
                 setState(() {
-                  lightSource = lightSource.copyWith(
-                    dy: value,
-                  ); // Updates Y position
+                  lightSource = lightSource.copyWith(dy: value); // Updates Y position
                 });
               },
             ),
